@@ -13,6 +13,6 @@ def register(request):
         student = RegisterStudent(request.POST)
         if student.is_valid():
             student.save()
+            messages.success(request, '✔ You Have Registered Four Our Course.')
         return redirect(index)
-    messages.success(request, '✔ You Have Registered Four Our Course.')
     return render(request, 'boot/register.html', {'form': RegisterStudent})

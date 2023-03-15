@@ -72,5 +72,13 @@
     </div>
 
 </main>
+<script src="{% static 'js/main.js' %} "></script>
+<script>window.addEventListener('load', hideSuccessMessage);</script>
+<!--{% for message in messages %}-->
+<!--    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}-->
+<!--        <script>window.addEventListener('load', hideSuccessMessage);</script>-->
+<!--    {% endif %}-->
+<!--{% endfor %}-->
+
 
 {% endblock %}
