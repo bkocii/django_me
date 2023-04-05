@@ -84,7 +84,7 @@ module.exports = function(XRegExp) {
      *   }, 'x'),
      *   minutes: /^[0-5][0-9]$/
      * });
-     * time.test('10:59'); // -> true
+     * time.test.py('10:59'); // -> true
      * XRegExp.exec('10:59', time).minutes; // -> '59'
      */
     XRegExp.build = function(pattern, subs, flags) {
@@ -602,7 +602,7 @@ module.exports = function(XRegExp) {
      *   alias: 'Hexadecimal',
      *   bmp: '0-9A-Fa-f'
      * }]);
-     * XRegExp('\\p{XDigit}:\\p{Hexadecimal}+').test('0:3D'); // -> true
+     * XRegExp('\\p{XDigit}:\\p{Hexadecimal}+').test.py('0:3D'); // -> true
      */
     XRegExp.addUnicodeData = function(data) {
         var ERR_NO_NAME = 'Unicode token requires name';
@@ -3444,7 +3444,7 @@ XRegExp._pad4 = pad4;
  *   function() {return '\\x07';},
  *   {scope: 'all'}
  * );
- * XRegExp('\\a[\\a-\\n]+').test('\x07\n\x07'); // -> true
+ * XRegExp('\\a[\\a-\\n]+').test.py('\x07\n\x07'); // -> true
  *
  * // Add the U (ungreedy) flag from PCRE and RE2, which reverses greedy and lazy quantifiers.
  * // Since `scope` is not specified, it uses 'default' (i.e., transformations apply outside of
@@ -4016,7 +4016,7 @@ XRegExp.split = function(str, separator, limit) {
  * `sticky` arguments specify the search start position, and whether the match must start at the
  * specified position only. The `lastIndex` property of the provided regex is not used, but is
  * updated for compatibility. Also fixes browser bugs compared to the native
- * `RegExp.prototype.test` and can be used reliably cross-browser.
+ * `RegExp.prototype.test.py` and can be used reliably cross-browser.
  *
  * @memberOf XRegExp
  * @param {String} str String to search.
@@ -4028,11 +4028,11 @@ XRegExp.split = function(str, separator, limit) {
  * @example
  *
  * // Basic use
- * XRegExp.test('abc', /c/); // -> true
+ * XRegExp.test.py('abc', /c/); // -> true
  *
  * // With pos and sticky
- * XRegExp.test('abc', /c/, 0, 'sticky'); // -> false
- * XRegExp.test('abc', /c/, 2, 'sticky'); // -> true
+ * XRegExp.test.py('abc', /c/, 0, 'sticky'); // -> false
+ * XRegExp.test.py('abc', /c/, 2, 'sticky'); // -> true
  */
 XRegExp.test = function(str, regex, pos, sticky) {
     // Do this the easy way :-)
@@ -4213,7 +4213,7 @@ fixed.exec = function(str) {
 };
 
 /**
- * Fixes browser bugs in the native `RegExp.prototype.test`. Calling `XRegExp.install('natives')`
+ * Fixes browser bugs in the native `RegExp.prototype.test.py`. Calling `XRegExp.install('natives')`
  * uses this to override the native method.
  *
  * @memberOf RegExp

@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core.mail import send_mail
+import os
 
 
 def index(request):
@@ -47,14 +48,14 @@ def send_email(request):
             else:
                 students_to_email = Students.objects.filter(course_name__course_name=select)
         print(len(students_to_email), subject, message)
-        # for i in range(len(students_to_email)):
-        #     send_mail(
-        #         subject,
-        #         message,
-        #         'burimabs81@gmail.com',
-        #         [students_to_email[i].email],
-        #         fail_silently=False,
-        #     )
+        for i in range(len(students_to_email)):
+            send_mail(
+                subject,
+                message,
+                os.environ.get('GMAIL_USERNAME'),
+                [students_to_email[i].email],
+                fail_silently=False,
+            )
         if len(students_to_email) == 0:
             messages.error(request, 'No students for the chosen selection!')
         else:
