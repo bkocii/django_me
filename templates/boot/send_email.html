@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container py-5 my-5">
+        <form method="post" action="{% url 'send_email' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="subject-field" class="form-label">Subject</label>
+          <input name="subject"  class="form-control" id="subject-field">
+        </div>
+        <label for="mySelect">Send to:</label>
+        <select name="select" id="mySelect" class="form-select form-select-lg mb-3 py-2 my-2" aria-label=".form-select-lg example">
+            <option value="All groups">All groups</option>
+            {% for student in students %}
+             <option value="{{student.course_name}}">{{student.course_name}}</option>
+            {%endfor%}
+        </select>
+            <label for="is_active" class="form-check-label">Send only to Active Students:</label>
+            <input type="checkbox" class="form-check-input" id="is_active" name="is_active"><br>
+            <label for="not_active" class="form-check-label">Send only to Non-Active Students:</label>
+            <input type="checkbox" class="form-check-input" id="not_active" name="not_active"><br>
+            <br>
+            <br>
+            <br>
+        <div class="mb-3">
+          <label for="message-box" class="form-label">Message</label>
+          <textarea name="message" class="form-control" id="message-box" rows="3"></textarea>
+        </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+              <button class="btn btn-primary" type="submit">Send Email</button>
+            </div>
+        </form>
+        {% include 'includes/messages.html' %}
+
+    </div>
+{% endblock %}

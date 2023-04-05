@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-mq$82xf40y)^+7+ay@9vz$pti=ev%w80o^rzcl^ijfaybz1%bq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['bkocii.pythonanywhere.com']
+ALLOWED_HOSTS = ['bkocii.pythonanywhere.com', '127.0.0.1']
 
 
 # Application definition
@@ -135,6 +135,15 @@ from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
+
+# email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'burimabs81@gmail.com'
+EMAIL_HOST_PASSWORD = 'aggdlohbbwebysuu'
+
 
 
 # Crispy forms
