@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import RegisterStudent
-from .models import Students
+from .models import Students, Course
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
@@ -26,18 +26,23 @@ def register(request):
 @login_required
 def send_email(request):
     students = Students.objects.all()
+    courses = Course.objects.all()
+    context = {
+        'students': students,
+        'courses': courses
+    }
     if request.method == 'POST':
         select = request.POST.get('select')
         subject = request.POST.get('subject')
         message = request.POST.get('message')
-        is_active = request.POST.get('is_active', False) == 'on'
-        not_active = request.POST.get('not_active', False) == 'on'
-        if is_active:
+        active = request.POST.get('is_active')
+        print(active)
+        if active == 'active':
             if select == 'All groups':
                 students_to_email = Students.objects.filter(is_active=True)
             else:
                 students_to_email = Students.objects.filter(course_name__course_name=select, is_active=True)
-        elif not_active:
+        elif active == 'not_active':
             if select == 'All groups':
                 students_to_email = Students.objects.filter(is_active=False)
             else:
@@ -47,7 +52,6 @@ def send_email(request):
                 students_to_email = Students.objects.filter()
             else:
                 students_to_email = Students.objects.filter(course_name__course_name=select)
-        print(len(students_to_email), subject, message)
         for i in range(len(students_to_email)):
             send_mail(
                 subject,
@@ -60,5 +64,5 @@ def send_email(request):
             messages.error(request, 'No students for the chosen selection!')
         else:
             messages.success(request, '✔ Email has been sent.')
-        return render(request, 'boot/send_email.html', {'students': students})
-    return render(request, 'boot/send_email.html', {'students': students})
+        return render(request, 'boot/send_email.html', context)
+    return render(request, 'boot/send_email.html', context)

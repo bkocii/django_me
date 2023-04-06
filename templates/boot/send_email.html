@@ -12,14 +12,14 @@
         <label for="mySelect">Send to:</label>
         <select name="select" id="mySelect" class="form-select form-select-lg mb-3 py-2 my-2" aria-label=".form-select-lg example">
             <option value="All groups">All groups</option>
-            {% for student in students %}
-             <option value="{{student.course_name}}">{{student.course_name}}</option>
+            {% for course in courses %}
+             <option value="{{course.course_name}}">{{course.course_name}}</option>
             {%endfor%}
         </select>
             <label for="is_active" class="form-check-label">Send only to Active Students:</label>
-            <input type="checkbox" class="form-check-input" id="is_active" name="is_active"><br>
+            <input type="radio" class="form-check-input" id="is_active" value="active" name="is_active"><br>
             <label for="not_active" class="form-check-label">Send only to Non-Active Students:</label>
-            <input type="checkbox" class="form-check-input" id="not_active" name="not_active"><br>
+            <input type="radio" class="form-check-input" id="not_active" value="not_active" name="is_active"><br>
             <br>
             <br>
             <br>
